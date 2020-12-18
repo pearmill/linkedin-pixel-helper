@@ -1,45 +1,131 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,700;1,400;1,600&display=swap');
+
+body {
+  font-family: 'Source Sans Pro', sans-serif !important;
+  font-size: 8px;
+
+  color: rgba(0,0,0, 0.85);
+  /* background: #F0ECE7; */
+}
+
 .App {
-  position: absolute;
-  top: 0px;
-  bottom: 0px;
-  left: 0px;
-  right: 0px;
-  text-align: center;
-  height: 100%;
-  padding: 10px;
-  background-color: #282c34;
+  width: 100%;
 }
 
-.App-logo {
-  height: 30vmin;
-  pointer-events: none;
+
+/* Tags */
+.App-tags {
+  width: 100%;
+  font-size: 2em;
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1em;
+
+  min-height: 147px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.tax-content {
+  padding-left: 0.333em;
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
+}
+
+.tag-item {
+  /* margin-top: 1em; */
+  padding: 1em;
+  border-bottom: 2px solid #E5E5E5;
+
+  display: flex;
+  flex-direction: row;
+}
+
+.tag-item .tax-type {
+  font-weight: 600;
+  line-height: 1.25em;
+}
+
+.tag-item .tax-ids {
+  color: rgba(0,0,0,0.7);
+  font-weight: normal !important;
+  font-size: 0.777em;
+}
+
+.tag-item .tag-status {
+  width: 1.2em;
+  height: 1.2em;
+  border-radius: 4em;
+  margin-right: 1em;
+
+  align-self: center;
+
+  background-color: #E5E5E5;
+}
+
+.tag-item .tag-status.success {
+  background-color: #21D27D;
+}
+
+.tag-item .tag-status.error {
+  background-color: #D23721;
+}
+
+/* Header */
+#li-logo {
+  width: 5em;
+
+  margin-right: 1em;
 }
 
 .App-header {
-  height: 100%;
+  padding: 2em;
+
+  display: flex;
+  flex-direction: row;
+
+  border-bottom: 2px solid #0073B1;
+  background: rgba(229, 229, 229, 0.50);
+}
+
+.App-header h1 {
+  font-size: 2.222em;
+  margin: 0;
+
+  font-weight: bold;
+}
+
+/* Footer */
+.App-footer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  font-size: 1.5em;
+  font-weight: 600;
+
+  padding: 1em;
+}
+
+#pm-logo {
+  width: 50px;
+  height: 12.71px;
+
+  margin-left: 0.333em;
+}
+
+
+.App-empty-state {
+  min-height: 147px;
+  padding: 1em;
+  margin: 0;
+
+  font-size: 2em;
+
+  font-weight: bold;
+  text-align: center;
+  text-transform: uppercase;
+
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
 }

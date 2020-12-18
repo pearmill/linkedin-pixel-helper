@@ -36,14 +36,15 @@ if (fileSystem.existsSync(secretsPath)) {
 var options = {
   mode: process.env.NODE_ENV || 'development',
   entry: {
-    newtab: path.join(__dirname, 'src', 'pages', 'Newtab', 'index.jsx'),
-    options: path.join(__dirname, 'src', 'pages', 'Options', 'index.tsx'),
-    popup: path.join(__dirname, 'src', 'pages', 'Popup', 'index.jsx'),
-    background: path.join(__dirname, 'src', 'pages', 'Background', 'index.js'),
-    contentScript: path.join(__dirname, 'src', 'pages', 'Content', 'index.js'),
+    // newtab: path.join(__dirname, 'src', 'pages', 'Newtab', 'index.jsx'),
+    // options: path.join(__dirname, 'src', 'pages', 'Options', 'index.tsx'),
+    popup: path.join(__dirname, 'src', 'pages', 'Popup', 'index.tsx'),
+    background: path.join(__dirname, 'src', 'pages', 'Background', 'index.ts'),
+    // contentScript: path.join(__dirname, 'src', 'pages', 'Content', 'index.js'),
   },
   chromeExtensionBoilerplate: {
-    notHotReload: ['contentScript'],
+    notHotReload: [''],
+    // notHotReload: ['contentScript'],
   },
   output: {
     path: path.resolve(__dirname, 'build'),
@@ -108,10 +109,10 @@ var options = {
   plugins: [
     new webpack.ProgressPlugin(),
     // clean the build folder
-    new CleanWebpackPlugin({
-      verbose: true,
-      cleanStaleWebpackAssets: true,
-    }),
+    // new CleanWebpackPlugin({
+    //   verbose: true,
+    //   cleanStaleWebpackAssets: true,
+    // }),
     // expose and write the allowed env vars on the compiled bundle
     new webpack.EnvironmentPlugin(['NODE_ENV']),
     new CopyWebpackPlugin({
@@ -133,27 +134,27 @@ var options = {
         },
       ],
     }),
-    new CopyWebpackPlugin({
-      patterns: [
-        {
-          from: 'src/pages/Content/content.styles.css',
-          to: path.join(__dirname, 'build'),
-          force: true,
-        },
-      ],
-    }),
-    new HtmlWebpackPlugin({
-      template: path.join(__dirname, 'src', 'pages', 'Newtab', 'index.html'),
-      filename: 'newtab.html',
-      chunks: ['newtab'],
-      cache: false,
-    }),
-    new HtmlWebpackPlugin({
-      template: path.join(__dirname, 'src', 'pages', 'Options', 'index.html'),
-      filename: 'options.html',
-      chunks: ['options'],
-      cache: false,
-    }),
+    // new CopyWebpackPlugin({
+    //   patterns: [
+    //     {
+    //       from: 'src/pages/Content/content.styles.css',
+    //       to: path.join(__dirname, 'build'),
+    //       force: true,
+    //     },
+    //   ],
+    // }),
+    // new HtmlWebpackPlugin({
+    //   template: path.join(__dirname, 'src', 'pages', 'Newtab', 'index.html'),
+    //   filename: 'newtab.html',
+    //   chunks: ['newtab'],
+    //   cache: false,
+    // }),
+    // new HtmlWebpackPlugin({
+    //   template: path.join(__dirname, 'src', 'pages', 'Options', 'index.html'),
+    //   filename: 'options.html',
+    //   chunks: ['options'],
+    //   cache: false,
+    // }),
     new HtmlWebpackPlugin({
       template: path.join(__dirname, 'src', 'pages', 'Popup', 'index.html'),
       filename: 'popup.html',
