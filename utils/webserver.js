@@ -29,18 +29,22 @@ delete config.chromeExtensionBoilerplate;
 
 var compiler = webpack(config);
 
-var server = new WebpackDevServer(compiler, {
+var server = new WebpackDevServer({
   https: false,
-  hot: true,
-  injectClient: false,
-  writeToDisk: true,
   port: env.PORT,
-  contentBase: path.join(__dirname, '../build'),
-  publicPath: `http://localhost:${env.PORT}`,
+  client: false,
+  static: {
+    directory: path.join(__dirname, '../build'),
+  },
+  devMiddleware: {
+    publicPath: `http://localhost:${env.PORT}`,
+    writeToDisk: true,
+  },
   headers: {
     'Access-Control-Allow-Origin': '*',
   },
-  disableHostCheck: true,
-});
+  allowedHosts: "all",
+},
+  compiler);
 
-server.listen(env.PORT);
+server.start(env.PORT);

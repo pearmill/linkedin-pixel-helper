@@ -3,14 +3,14 @@ import logo from '../../assets/img/LI-logo.png'
 import pearmill from '../../assets/img/pearmill.png'
 import './Popup.css';
 
-let timer : number
+let timer: number
 class Popup extends React.Component<PopupProps, PopupState> {
-  state : PopupState = {}
+  state: PopupState = {}
 
-  componentDidMount () {
-    timer = setInterval(() => {
+  componentDidMount() {
+    timer = window.setInterval(() => {
       const backgroundPage = chrome.extension.getBackgroundPage() as any
-      chrome.tabs.query( { active: true, currentWindow: true }, (tabs) => {
+      chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
 
         if (backgroundPage) {
           this.setState({
@@ -22,7 +22,7 @@ class Popup extends React.Component<PopupProps, PopupState> {
     }, 200);
   }
 
-  renderInsightTag (index : number, partnerId? : string, status? : string) {
+  renderInsightTag(index: number, partnerId?: string, status?: string) {
     return (
       <li className="tag-item" key={`{index}-{partnerId}`}>
         <div className={"tag-status " + status}></div>
@@ -35,7 +35,7 @@ class Popup extends React.Component<PopupProps, PopupState> {
     )
   }
 
-  renderPixelTag (index : number, partnerId? : string, conversionId? : string, status? : string) {
+  renderPixelTag(index: number, partnerId?: string, conversionId?: string, status?: string) {
     return (
       <li className="tag-item" key={`{index}-{partnerId}`}>
         <div className={"tag-status " + status}></div>
@@ -51,17 +51,19 @@ class Popup extends React.Component<PopupProps, PopupState> {
     )
   }
 
-  componentDidUnMount () {
+  componentDidUnMount() {
     clearInterval(timer)
   }
 
-  render () {
-    const data : { [key: number]: ExtensionTabData } = this.state.data || {}
-    if (!this.state.tabId) { return (
-      <div className="App-empty-state"></div>
-    )}
+  render() {
+    const data: { [key: number]: ExtensionTabData } = this.state.data || {}
+    if (!this.state.tabId) {
+      return (
+        <div className="App-empty-state"></div>
+      )
+    }
 
-    const currentTabData : ExtensionTabData = data[this.state.tabId]
+    const currentTabData: ExtensionTabData = data[this.state.tabId]
 
     return (
       <div className="App">
@@ -72,8 +74,8 @@ class Popup extends React.Component<PopupProps, PopupState> {
 
         {currentTabData ? (
           <ol className="App-insight-tags App-tags">
-            {currentTabData.insight_tags.map(({ partnerId, status }, index : number) => this.renderInsightTag(index, partnerId, status))}
-            {currentTabData.pixels.map(({ partnerId, conversionId, status }, index : number) => this.renderPixelTag(currentTabData.insight_tags.length + index, partnerId, conversionId, status))}
+            {currentTabData.insight_tags.map(({ partnerId, status }, index: number) => this.renderInsightTag(index, partnerId, status))}
+            {currentTabData.pixels.map(({ partnerId, conversionId, status }, index: number) => this.renderPixelTag(currentTabData.insight_tags.length + index, partnerId, conversionId, status))}
           </ol>
         ) : (
           <div className="App-empty-state">No LinkedIn Insight Tag or Event Pixels were found on this page.</div>
